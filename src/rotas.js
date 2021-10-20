@@ -1,17 +1,19 @@
 const express = require("express");
-const controladores = require("./controladores/contas-bancarias");
+const contas = require("./controladores/contas");
+const transacoes = require("./controladores/transacoes");
+
 const roteadores = express();
 
-roteadores.get("/contas", controladores.listarTodasAsContas);
-roteadores.post("/contas", controladores.criarConta);
-roteadores.put("/contas/:numeroConta/usuario", controladores.atualizarConta);
-roteadores.delete("/contas/:numeroConta", controladores.excluirConta);
+roteadores.get("/contas", contas.listarTodasAsContas);
+roteadores.post("/contas", contas.criarConta);
+roteadores.put("/contas/:numeroConta/usuario", contas.atualizarConta);
+roteadores.delete("/contas/:numeroConta", contas.excluirConta);
 
-roteadores.post("/transacoes/depositar", controladores.depositar);
-roteadores.post("/transacoes/sacar", controladores.sacar);
-roteadores.post("/transacoes/transferir", controladores.transferir);
+roteadores.post("/transacoes/depositar", transacoes.depositar);
+roteadores.post("/transacoes/sacar", transacoes.sacar);
+roteadores.post("/transacoes/transferir", transacoes.transferir);
 
-roteadores.get("/contas/saldo", controladores.saldo);
-roteadores.get("/contas/extrato", controladores.extrato);
+roteadores.get("/contas/saldo", transacoes.saldo);
+roteadores.get("/contas/extrato", transacoes.extrato);
 
 module.exports = { roteadores };
